@@ -58,7 +58,7 @@ public class Game {
 				player2.addPoints(arr[right]);
 			}
 			arr[right] = 0;
-			right ++;
+			right --;
 		}
 
 	}
