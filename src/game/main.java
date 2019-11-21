@@ -15,24 +15,29 @@ public class main {
 			int act = game.nextInt();
 			if(act == 1) {
 				Game one = new Game();
+				System.out.println("******************************");
+				
+				Player player1 = new Player();
+				Player player2 = new Player();
 				int whoPLay = (int) (Math.random()*2);
 				while(!one.end()) {
-					one.move(whoPLay);
-					if(whoPLay == 0){
+					if (whoPLay == 0) {
+						one.move(player1);
 						whoPLay = 1;
 					}
 					else {
+						one.move(player2);
 						whoPLay = 0;
 					}
 				}
-				one.score();
+				one.score(player1, player2);
 			}
 			if(act == 2) {
 				System.out.println("******************************");
 				System.out.println("written by Yarin Shapira");
 			}
 			if(act == 3) {
-				
+
 				break;
 			}
 		}

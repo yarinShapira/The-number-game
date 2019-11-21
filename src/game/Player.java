@@ -14,6 +14,10 @@ public class Player {
 			name = "Idiot!";
 		}
 	}
+	
+	public Player(String pc) {
+		name = "Pc";
+	}
 
 
 	public void addPoints (int add) {

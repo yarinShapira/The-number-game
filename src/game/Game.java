@@ -1,38 +1,34 @@
 package game;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
 	private int[] arr;
 	private int left;
 	private int right;
-	private Player player1;
-	private Player player2;
+
 
 
 	public Game() {
-		int arrlength = (int) ((Math.random()*10)+1)*4;
+		int arrlength = (int) ((Math.random()*10)+1)*2;
 		arr = new int[arrlength];
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (int) (Math.random()*20) + 1;
+			int num = (int) (Math.random()*20) + 1;
+			int ninegative = (int) (Math.random()*4) + 1;
+			if (ninegative == 1) {
+				num = num * -1;
+			}
+			arr[i] = num;
 		}
 		left = 0;
 		right = arr.length - 1;
-		player1 = new Player();
-		player2 = new Player();
 	}
 
 
-	public void move(int player) {
+	public void move(Player player) {
 		System.out.println("******************************");
-		System.out.println(Arrays.toString(arr));
-		if (player == 0) {
-			System.out.println(player1.getName() + "'s" + " turn");
-		}
-		else {
-			System.out.println(player2.getName() + "'s" + " turn");
-		}
+		System.out.println(toString(arr));
+		System.out.println(player.getName() + "'s turn, you have " + player.getPoints() + " points.");
 		String num = "";
 		do{
 			System.out.println("you can choose: " + arr[left] + "-l" + " or: " + arr[right] + "-r");
@@ -41,26 +37,15 @@ public class Game {
 			num = playerSelect.next();
 		} while(!num.equals("l") && !num.equals("r"));
 		if (num.equals("l")) {
-			if (player == 0) {
-				player1.addPoints(arr[left]);
-			}
-			else {
-				player2.addPoints(arr[left]);
-			}
+			player.addPoints(arr[left]);
 			arr[left] = 0;
 			left++;
 		}
 		else {
-			if (player == 0) {
-				player1.addPoints(arr[right]);
-			}
-			else {
-				player2.addPoints(arr[right]);
-			}
+			player.addPoints(arr[right]);
 			arr[right] = 0;
 			right --;
 		}
-
 	}
 
 
@@ -74,7 +59,7 @@ public class Game {
 	}
 
 
-	public void score() {
+	public void score(Player player1 ,Player player2) {
 		System.out.println("******************************");
 		System.out.println(player1.getName() + ": " + player1.getPoints() + " points.");
 		System.out.println(player2.getName() + ": " + player2.getPoints() + " points.");
@@ -87,5 +72,20 @@ public class Game {
 		else {
 			System.out.println(player2.getName() + " Won!!!");
 		}
+	}
+
+	public String toString(int[] arr) {
+		String ans = "[";
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] != 0) {
+				if (i != arr.length-1) {
+					ans = ans + arr[i] + ", ";
+				}
+				else {
+					ans = ans + arr[i] + "]";
+				}
+			}
+		}
+		return ans;
 	}
 }
